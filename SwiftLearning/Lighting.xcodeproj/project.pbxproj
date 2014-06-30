@@ -14,6 +14,7 @@
 		B46F4FD1194EF3FC0005D4BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B46F4FD0194EF3FC0005D4BB /* Images.xcassets */; };
 		B46F4FE8194EF5E50005D4BB /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = B46F4FE7194EF5E50005D4BB /* File.c */; };
 		B46F4FF0194F033C0005D4BB /* HKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B46F4FEF194F033C0005D4BB /* HKUtility.m */; };
+		B477A93719612E2800DC905D /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B477A93619612E2800DC905D /* WaterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		B46F4FEE194F033C0005D4BB /* HKUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKUtility.h; sourceTree = "<group>"; };
 		B46F4FEF194F033C0005D4BB /* HKUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKUtility.m; sourceTree = "<group>"; };
 		B46F4FF1194F03C00005D4BB /* HKDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDefines.h; sourceTree = "<group>"; };
+		B477A93619612E2800DC905D /* WaterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 		B46F4FC4194EF3FC0005D4BB /* SwiftLearning */ = {
 			isa = PBXGroup;
 			children = (
+				B477A93519612E0E00DC905D /* Views */,
 				B46F4FED194F033C0005D4BB /* OC */,
 				B46F4FC7194EF3FC0005D4BB /* AppDelegate.swift */,
 				B46F4FC9194EF3FC0005D4BB /* FirstViewController.swift */,
@@ -90,6 +93,14 @@
 				B46F4FEF194F033C0005D4BB /* HKUtility.m */,
 			);
 			path = OC;
+			sourceTree = "<group>";
+		};
+		B477A93519612E0E00DC905D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B477A93619612E2800DC905D /* WaterView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 				B46F4FCC194EF3FC0005D4BB /* SecondViewController.swift in Sources */,
 				B46F4FC8194EF3FC0005D4BB /* AppDelegate.swift in Sources */,
 				B46F4FCA194EF3FC0005D4BB /* FirstViewController.swift in Sources */,
+				B477A93719612E2800DC905D /* WaterView.swift in Sources */,
 				B46F4FE8194EF5E50005D4BB /* File.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

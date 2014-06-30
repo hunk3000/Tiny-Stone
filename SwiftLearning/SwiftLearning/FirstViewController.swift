@@ -14,10 +14,15 @@ class FirstViewController: UIViewController {
     var titleLabel:UILabel!
     var subtitleLabel:UILabel!
     var captureDevice:AVCaptureDevice!
+    var waterBackgroundView:WaterView!
     
     override func loadView() {
         super.loadView()
         
+        waterBackgroundView = WaterView(frame: CGRectZero)
+        self.view.addSubview(waterBackgroundView)
+        
+        self.view.backgroundColor = UIColor.whiteColor()
         var attStr:NSMutableAttributedString = NSMutableAttributedString(string: "Att String")
         attStr.addAttribute(NSForegroundColorAttributeName,
             value: UIColor.redColor(), range: NSMakeRange(0, 3))
@@ -35,23 +40,26 @@ class FirstViewController: UIViewController {
         
         HKUtility.playVibrate()
         
-        initTorch()
-        torchOn();
-        let torchOffSel = Selector("torchOff")
+//        initTorch()
+//        torchOn();
+//        let torchOffSel = Selector("torchOff")
         
     }
     
     override func viewWillLayoutSubviews()  {
         super.viewWillLayoutSubviews()
+        let f = self.view.bounds
         
         titleLabel.frame = CGRectMake(100, 100, 100, 30)
         subtitleLabel.frame = CGRectMake(100, 130, 200, 30)
+        waterBackgroundView.frame = CGRectMake(0, 0, f.size.width, f.size.height)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        HKUtility.showMessageBox(HKUtility.dateline())
+        //HKUtility.showMessageBox(HKUtility.dateline())
+
         
         var nn = [1,23,3,42,5,6]
         println(nn)
