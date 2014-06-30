@@ -35,21 +35,9 @@ class FirstViewController: UIViewController {
         
         HKUtility.playVibrate()
         
-        captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        var err:NSError?
-        if captureDevice.hasTorch {
-            let locked = captureDevice.lockForConfiguration(&err)
-            if locked {
-                var i = 0
-                captureDevice.torchMode = .On
-                dispatch_after(1000 * 1000, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    self.captureDevice.torchMode = .Off
-                    self.captureDevice.unlockForConfiguration()
-                    })
-            }
-        } else {
-            HKUtility.showMessageBox("Your device does not have a torch.")
-        }
+        initTorch()
+        torchOn();
+        let torchOffSel = Selector("torchOff")
         
     }
     
@@ -63,7 +51,6 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        test();
         HKUtility.showMessageBox(HKUtility.dateline())
         
         var nn = [1,23,3,42,5,6]
@@ -75,7 +62,7 @@ class FirstViewController: UIViewController {
         var distance = 0.0
         
         for RSSI in 40...100 {
-            var temp:Double = Double(RSSI - 55) / 38
+            var temp:Double = Double(RSSI - 50) / 38
             distance = pow(10.0, temp);
             println("dbm = -\(RSSI) distance = \(distance)")
         }
@@ -86,7 +73,44 @@ class FirstViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func initTorch() {
+        if(captureDevice == .None) {
+            captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        }
+        
+    }
+    
+    func torchOn() {
+        
+        var err:NSError?
+        if captureDevice.hasTorch {
+            let locked = captureDevice.lockForConfiguration(&err)
+            if locked {
+                captureDevice.torchMode = .On
+                self.captureDevice.unlockForConfiguration()
+            } else {
+                HKUtility.showMessageBox("lock configuration error.")
+            }
+        } else {
+            HKUtility.showMessageBox("Your device does not have a torch.")
+        }
+    }
+    
+    func torchOff() {
+        var err:NSError?
+        if captureDevice.hasTorch {
+            let locked = captureDevice.lockForConfiguration(&err)
+            if locked {
+                captureDevice.torchMode = .Off
+                self.captureDevice.unlockForConfiguration()
+            } else {
+                HKUtility.showMessageBox("lock configuration error.")
+            }
+        } else {
+            HKUtility.showMessageBox("Your device does not have a torch.")
+        }
+    }
 
 }
 
