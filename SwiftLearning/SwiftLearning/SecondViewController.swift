@@ -37,7 +37,14 @@ class SecondViewController: UIViewController,UITableViewDelegate,UITableViewData
         titleLabel.frame = CGRectMake(0, 0, 200, 30)
         titleLabel.center = self.view.center;
     }
-                            
+    
+    override func viewDidAppear(animated: Bool)  {
+        super.viewDidAppear(animated)
+        
+        HKAnimation.animationCubeFromLeft(self.view)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

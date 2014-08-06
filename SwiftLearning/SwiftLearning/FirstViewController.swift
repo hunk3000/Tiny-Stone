@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import QuartzCore
 
 class FirstViewController: UIViewController {
     
@@ -15,65 +16,106 @@ class FirstViewController: UIViewController {
     var subtitleLabel:UILabel!
     var captureDevice:AVCaptureDevice!
     var waterBackgroundView:WaterView!
+    var circleView:CircleView!
+    var ringView:CircleRingView!
+    var bgView:UIImageView!
     
     override func loadView() {
         super.loadView()
         
-        waterBackgroundView = WaterView(frame: CGRectZero)
-        self.view.addSubview(waterBackgroundView)
+        bgView = UIImageView(image: UIImage(named: "bg_iphone5"))
+        self.view.addSubview(bgView)
         
-        self.view.backgroundColor = UIColor.whiteColor()
-        var attStr:NSMutableAttributedString = NSMutableAttributedString(string: "Att String")
-        attStr.addAttribute(NSForegroundColorAttributeName,
-            value: UIColor.redColor(), range: NSMakeRange(0, 3))
-        attStr.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(33), range: NSMakeRange(0, 3))
-
-        titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFontOfSize(14.0)
-        //titleLabel.text = "I am title"
-        titleLabel.attributedText = attStr;
-        self.view.addSubview(titleLabel)
+//        //Speed Ring View
+//        ringView = CircleRingView(frame: CGRectZero)
+//        self.view.addSubview(ringView)
         
-        subtitleLabel = UILabel()
-        subtitleLabel.text = "Subtitle contents"
-        self.view.addSubview(subtitleLabel)
+//        //Water background
+//        waterBackgroundView = WaterView(frame: CGRectZero)
+//        self.view.addSubview(waterBackgroundView)
         
-        HKUtility.playVibrate()
+//        //Ring View
+//        circleView = CircleView(frame: CGRectZero)
+//        self.view.addSubview(circleView)
+//        circleView.layer.addAnimation(ani, forKey: "animation")
         
-//        initTorch()
-//        torchOn();
-//        let torchOffSel = Selector("torchOff")
+        
+//        //Text
+//        self.view.backgroundColor = UIColor.whiteColor()
+//        var attStr:NSMutableAttributedString = NSMutableAttributedString(string: "100 M")
+//        attStr.addAttribute(NSForegroundColorAttributeName,
+//            value: UIColor.redColor(), range: NSMakeRange(0, 5))
+//        attStr.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(33), range: NSMakeRange(0, 5))
+//        titleLabel = UILabel()
+//        titleLabel.font = UIFont.systemFontOfSize(14.0)
+//        titleLabel.textAlignment = .Center
+//        titleLabel.attributedText = attStr;
+//        self.view.addSubview(titleLabel)
+//        subtitleLabel = UILabel()
+//        subtitleLabel.text = "free memeory"
+//        self.view.addSubview(subtitleLabel)
+        
         
     }
     
     override func viewWillLayoutSubviews()  {
         super.viewWillLayoutSubviews()
         let f = self.view.bounds
+        bgView.frame = f
+//        titleLabel.frame = CGRectMake(100, 130, 120, 30)
+//        subtitleLabel.frame = CGRectMake(100, 160, 120, 30)
+//        waterBackgroundView.frame = f
+//        circleView.frame = CGRectMake(160, 160, 120, 120)
         
-        titleLabel.frame = CGRectMake(100, 100, 100, 30)
-        subtitleLabel.frame = CGRectMake(100, 130, 200, 30)
-        waterBackgroundView.frame = CGRectMake(0, 0, f.size.width, f.size.height)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //HKUtility.showMessageBox(HKUtility.dateline())
+        
 
         
-        var nn = [1,23,3,42,5,6]
-        println(nn)
-        sort(nn,<=)
-        println(nn)
+//        HKUtility.playVibrate()
+//        HKUtility.showMessageBox(HKUtility.dateStrWithFormat("HH:mm"));
+//
+//        initTorch()
+//        torchOn();
+//        let torchOffSel = Selector("torchOff")
+//        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: torchOffSel, userInfo: nil, repeats: false)
+//        
+//        var nn = [1,23,3,42,5,6]
+//        println(nn)
+//        sort(nn,<=)
+//        println(nn)
+//        
+//        var RSSI:Int = 80
+//        var distance = 0.0
+//        
+//        for RSSI in 40...100 {
+//            var temp:Double = Double(RSSI - 50) / 38
+//            distance = pow(10.0, temp);
+//            println("dbm = -\(RSSI) distance = \(distance)")
+//        }
         
-        var RSSI:Int = 80
-        var distance = 0.0
         
-        for RSSI in 40...100 {
-            var temp:Double = Double(RSSI - 50) / 38
-            distance = pow(10.0, temp);
-            println("dbm = -\(RSSI) distance = \(distance)")
-        }
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ringView = CircleRingView(frame: CGRectZero)
+        ringView.frame = CGRectMake(20, 80, 280, 280)
+        self.view.addSubview(ringView)
+    }
+    
+    override func viewWillDisappear(animated: Bool)  {
+        super.viewWillDisappear(animated)
+        ringView.removeFromSuperview()
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        //HKAnimation.animationCubeFromRight(self.view)
     }
     
 
@@ -82,11 +124,12 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //Torch related functions
     func initTorch() {
         if(captureDevice == .None) {
             captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         }
-        
     }
     
     func torchOn() {
