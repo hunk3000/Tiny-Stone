@@ -1,2 +1,2 @@
-Tiny-Stone
+Tiny-Stone Studio
 ==========
